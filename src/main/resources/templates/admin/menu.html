@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar" th:fragment="menu(pId, cId)">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- Sidebar user panel -->
+		<div class="user-panel">
+			<div class="pull-left image">
+				<img th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image" />
+			</div>
+			<div class="pull-left info">
+				<p>Itachi Zhu</p>
+				<a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> 在线</a>
+			</div>
+		</div>
+		<!-- sidebar menu: : style can be found in sidebar.less -->
+		<ul class="sidebar-menu">
+			<li class="header">主导航</li>
+			<li th:class="${pId} == 0 ? 'active' : ''">
+				<a th:href="@{/admin}">
+					<i class="fa fa-th"></i> <span>欢迎页</span>
+				</a>
+			</li>
+			<li th:class="${pId} == 1 ? 'active treeview' : 'treeview'">
+				<a href="javascript:void(0);">
+					<i class="fa fa-server"></i> <span>服务管理</span>
+					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+				</a>
+				<ul class="treeview-menu">
+					<li th:class="(${pId} == 1 and ${cId} == 0) ? 'active' : ''"><a th:href="@{/admin/services}"><i class="fa fa-circle-o"></i> 服务信息</a></li>
+					<li th:class="(${pId} == 1 and ${cId} == 1) ? 'active' : ''"><a th:href="@{/admin/caches}"><i class="fa fa-circle-o"></i> 缓存管理</a></li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<!-- /.sidebar -->
+</aside>
+</html>

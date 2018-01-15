@@ -1,0 +1,5 @@
+applications:
+- name: services-manage
+  memory: 1G
+  random-route: true
+  path: build/libs/manager.jar

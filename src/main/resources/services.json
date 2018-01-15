@@ -1,0 +1,17 @@
+[
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app",
+    "url": "http://localhost:8080/admin"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app1",
+    "url": "www.baidu.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app2",
+    "url": "www.google.com"
+  }
+]
