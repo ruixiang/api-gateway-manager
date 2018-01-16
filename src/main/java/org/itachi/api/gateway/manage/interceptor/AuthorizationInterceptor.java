@@ -2,6 +2,7 @@ package org.itachi.api.gateway.manage.interceptor;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.itachi.api.gateway.manage.util.Constants;
 import org.itachi.api.gateway.manage.util.ThrowableUtil;
 import org.itachi.api.gateway.manage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,6 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
     private static final String HTTP = "http";
-    private static final String SESSION_KEY = "SERVICE_USER";
 
     @Autowired
     @Qualifier("messageSource")
@@ -102,7 +102,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        if (session.getAttribute(SESSION_KEY) == null) {
+        if (session.getAttribute(Constants.SESSION_KEY) == null) {
             result.put(CODE, 503);
             result.put(MESSAGE, "session中对应的对象不存在，用户没登陆");
             Utils.cleanSessions(request);

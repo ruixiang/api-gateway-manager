@@ -71,8 +71,6 @@
                                 <td nowrap="true">{{item.readTimeOut ? item.readTimeOut : 0}} ms</td>
                                 <td nowrap="true">
                                     <a href="javascript:void(0);" v-on:click="openServiceWindow(item.id,'修改服务');">修改</a>
-                                     |
-                                    <a href="javascript:void(0);" v-on:click="cleanCache(item.id, item.appName);">清空缓存</a>
                                 </td>
                             </tr>
                         </table>
@@ -82,12 +80,8 @@
                 <div class="box-footer clearfix">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li><a href="javascript:void(0);" v-on:click="search(1);">&laquo;</a></li>
-                        <template v-for="item in size">
-                            <li v-if="item == page"><a href="javascript:void(0);">{{item}}</a></li>
-                            <!--/*-->
-                            <li v-else><a href="javascript:void(0);" v-on:click="search(item);">{{item}}</a></li>
-                            <!--*/-->
-                        </template>
+                        <li v-for="item in size" v-if="item == page"><a href="javascript:void(0);">{{item}}</a></li>
+                        <li v-else="v-else"><a href="javascript:void(0);" v-on:click="search(item);">{{item}}</a></li>
                         <li><a href="javascript:void(0);" v-on:click="search(size);">&raquo;</a></li>
                     </ul>
                 </div>

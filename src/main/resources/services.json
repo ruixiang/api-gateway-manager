@@ -13,5 +13,55 @@
     "_class": "org.itachi.api.gateway.manage.domain.Service",
     "appName": "test-app2",
     "url": "www.google.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app3",
+    "url": "http://localhost:8080/admin"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app4",
+    "url": "www.baidu.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app5",
+    "url": "www.google.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app6",
+    "url": "http://localhost:8080/admin"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app7",
+    "url": "www.baidu.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app8",
+    "url": "www.google.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app9",
+    "url": "http://localhost:8080/admin"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app10",
+    "url": "www.baidu.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app11",
+    "url": "www.google.com"
+  },
+  {
+    "_class": "org.itachi.api.gateway.manage.domain.Service",
+    "appName": "test-app12",
+    "url": "www.google.com"
   }
 ]

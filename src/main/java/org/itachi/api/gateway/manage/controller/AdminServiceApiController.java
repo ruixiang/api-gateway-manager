@@ -1,17 +1,21 @@
 package org.itachi.api.gateway.manage.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.itachi.api.gateway.manage.domain.Pager;
 import org.itachi.api.gateway.manage.domain.Service;
+import org.itachi.api.gateway.manage.repositories.jpa.JpaServiceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,10 +31,10 @@ import java.util.Map;
 @Validated
 public class AdminServiceApiController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(AdminServiceApiController.class);
-    private CrudRepository<Service, String> repository;
+    private JpaServiceRepository repository;
 
     @Autowired
-    public AdminServiceApiController(CrudRepository<Service, String> repository) {
+    public AdminServiceApiController(JpaServiceRepository repository) {
         this.repository = repository;
     }
 
@@ -40,17 +44,31 @@ public class AdminServiceApiController extends BaseController {
                                         @RequestParam("rows") Integer rows) throws Exception {
         Map<String, Object> map = new HashMap<>(16);
         Pager pager = buildPager(page, rows);
-        pager.setTotal((int) repository.count());
+        if (StringUtils.isBlank(appName)) {
+            pager.setTotal((int) repository.count());
+            map.put("services", repository.findAll(new PageRequest(page - 1, rows)).getContent());
+        } else {
+            pager.setTotal(repository.countByAppName(appName));
+            Page<Service> servicePage = repository.findByAppName(appName, new PageRequest(page - 1, rows));
+            map.put("services", servicePage.getContent());
+        }
         map.put("pager", pager);
-        map.put("services", repository.findAll());
+
         return map;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable String id) {
+    public void deleteById(@PathVariable Long id) {
         logger.info("Deleting service " + id);
         repository.delete(id);
     }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@RequestBody List<Long> ids) {
+        repository.deleteByIdIn(ids);
+    }
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -60,7 +78,7 @@ public class AdminServiceApiController extends BaseController {
     }
 
     @GetMapping("/{id}")
-    public Service service(@PathVariable("id") String id) throws Exception {
+    public Service service(@PathVariable("id") Long id) throws Exception {
         logger.info("Getting service " + id);
         return repository.findOne(id);
     }

@@ -20,7 +20,7 @@ public class PostgresLocalDataSourceConfig extends AbstractLocalDataSourceConfig
 
     @Bean
     public DataSource dataSource() {
-        return createDataSource("jdbc:postgresql://localhost/music",
+        return createDataSource("jdbc:postgresql://localhost/api_gateway",
                 "org.postgresql.Driver", "postgres", "postgres");
     }
 

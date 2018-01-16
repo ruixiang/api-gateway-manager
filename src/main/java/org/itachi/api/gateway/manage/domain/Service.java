@@ -2,7 +2,6 @@ package org.itachi.api.gateway.manage.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,15 +15,14 @@ import java.io.Serializable;
  * @author itachi
  */
 @Entity
-@Table(name = "app_service")
+@Table(name = "app_service", indexes = {@Index(name = "app_name_idx", columnList = "app_name", unique = true)})
 @Data
 @NoArgsConstructor
 public class Service implements Serializable {
     @Id
-    @Column(length=40)
-    @GeneratedValue(generator="randomId")
-    @GenericGenerator(name="randomId", strategy="org.itachi.api.gateway.manage.domain.RandomIdGenerator")
-    private String id;
+    @GeneratedValue
+    private Long id;
+    @Column(name = "app_name", nullable = false, unique = true)
     private String appName;
     private String level;
     private Integer encryption;
