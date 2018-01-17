@@ -6,11 +6,14 @@ import org.itachi.api.gateway.manage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Created by itachi on 2018/1/16.
@@ -40,7 +43,14 @@ public class AdminLoginController extends BaseController {
      * 进入登录页面
      */
     @GetMapping("/login")
-    public String login() throws Exception {
+    public String login(Model model) throws Exception {
+        String host;
+        try {
+            host = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            host = "unknow";
+        }
+        model.addAttribute("host", host);
         return "admin/login";
     }
 
